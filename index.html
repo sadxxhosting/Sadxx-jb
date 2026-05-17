@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>SADXX OFFICIAL</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+:root{
+    --bg:#070b14;
+    --card:rgba(18,22,35,.88);
+    --border:rgba(255,255,255,.08);
+    --text:#ffffff;
+    --soft:#bfc8d8;
+    --main:#4da3ff;
+    --main2:#6b5cff;
+    --danger:#ff4d6d;
+}
+
+body{
+    background:
+    linear-gradient(rgba(0,0,0,.72),rgba(0,0,0,.84)),
+    url('https://files.catbox.moe/ue5ra5.jpg');
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+    color:white;
+    min-height:100vh;
+}
+
+header{
+    padding:14px;
+    position:sticky;
+    top:0;
+    z-index:999;
+    backdrop-filter:blur(14px);
+    background:rgba(0,0,0,.28);
+}
+
+.nav{
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    scrollbar-width:none;
+    padding-bottom:4px;
+}
+
+.nav::-webkit-scrollbar{
+    display:none;
+}
+
+.nav button{
+    min-width:140px;
+    height:55px;
+
+    border:none;
+    border-radius:18px;
+
+    background:rgba(255,255,255,.08);
+
+    color:white;
+    font-size:16px;
+    font-weight:600;
+
+    flex-shrink:0;
+
+    cursor:pointer;
+    transition:.25s;
+}
+
+.nav button:hover,
+.nav button.active{
+    background:linear-gradient(135deg,#4da3ff,#695cff);
+    box-shadow:
+    0 0 20px rgba(77,163,255,.35);
+}
+
+.container{
+    width:100%;
+    max-width:420px;
+    margin:auto;
+    padding:14px;
+    position:relative;
+    min-height:100vh;
+}
+
+.page{
+    display:none;
+    width:100%;
+
+    opacity:0;
+    transform:
+    translateX(40px)
+    scale(.98);
+
+    transition:
+    opacity .35s ease,
+    transform .35s ease;
+}
+
+/* ACTIVE PAGE */
+.page.active{
+    display:block;
+    animation:slide .35s ease;
+
+    opacity:1;
+
+    transform:
+    translateX(0)
+    scale(1);
+}
+
+@keyframes slide{
+    from{
+        opacity:0;
+        transform:
+        translateX(40px)
+        scale(.98);
+    }
+
+    to{
+        opacity:1;
+        transform:
+        translateX(0)
+        scale(1);
+    }
+}
+
+.hero,
+.payment-box,
+.owner-box,
+.card{
+    background:
+    linear-gradient(
+    180deg,
+    rgba(13,18,40,.95),
+    rgba(8,11,28,.96)
+    );
+
+    border:1px solid rgba(255,255,255,.05);
+
+    border-radius:26px;
+
+    padding:22px;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,.45);
+
+    backdrop-filter:blur(12px);
+}
+
+/* HERO */
+.hero{
+    margin-top:10px;
+    text-align:center;
+    padding:45px 22px;
+}
+
+.hero h1{
+    font-size:38px;
+    line-height:1.1;
+    margin-bottom:18px;
+
+    background:linear-gradient(to right,#fff,#7fb8ff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.hero p{
+    font-size:16px;
+    line-height:1.8;
+    color:#c5c8d4;
+}
+
+.btn-group{
+    margin-top:25px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+.btn,
+.copy-btn,
+.action button,
+.action a{
+    height:56px;
+    border:none;
+    border-radius:16px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-decoration:none;
+    color:white;
+    font-weight:700;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.btn-primary,
+.order-btn,
+.copy-btn{
+    background:
+    linear-gradient(
+    135deg,
+    #4da3ff,
+    #695cff
+    );
+}
+
+.btn-secondary,
+.zoom-btn{
+    background:rgba(255,255,255,.08);
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+}
+
+.grid{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    margin-top:10px;
+}
+
+.card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:24px;
+    overflow:hidden;
+    transition:.3s;
+    backdrop-filter:blur(12px);
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    border-color:rgba(77,163,255,.4);
+}
+
+.card img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+    border-radius:18px;
+}
+
+.card-content{
+    padding-top:18px;
+}
+
+.card-title{
+    font-size:20px;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.card-desc{
+    font-size:15px;
+    color:#c8cad7;
+    line-height:1.7;
+}
+
+.price{
+    margin-top:16px;
+    font-size:24px;
+    color:#6eb2ff;
+    font-weight:700;
+}
+
+.action{
+    margin-top:18px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.action button,
+.action a{
+    flex:1;
+    text-align:center;
+    padding:12px;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    text-decoration:none;
+    color:white;
+    font-weight:600;
+}
+
+.zoom-btn{
+    background:rgba(255,255,255,.08);
+}
+
+.order-btn{
+    background:linear-gradient(135deg,var(--main),var(--main2));
+}
+
+.payment-box{
+    margin-top:14px;
+}
+
+.payment-box h2{
+    font-size:22px;
+    margin-bottom:16px;
+}
+
+.payment-number{
+    height:58px;
+    display:flex;
+    align-items:center;
+    padding:0 18px;
+    border-radius:16px;
+    background:rgba(255,255,255,.05);
+    margin-bottom:14px;
+    font-size:17px;
+}
+
+.copy-btn{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:14px;
+    background:linear-gradient(135deg,var(--main),var(--main2));
+    color:white;
+    cursor:pointer;
+    font-weight:700;
+}
+
+.owner-box{
+    text-align:center;
+    margin-top:10px;
+}
+
+.owner-box img{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    object-fit:cover;
+    margin-bottom:18px;
+    border:3px solid rgba(255,255,255,.08);
+}
+
+.owner-box h2{
+    font-size:28px;
+}
+
+.owner-box p{
+    margin-top:12px;
+    line-height:1.8;
+    color:#c7cada;
+    font-size:15px;
+}
+
+.socials{
+    margin-top:20px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.socials a{
+    height:54px;
+    border-radius:16px;
+    background:rgba(255,255,255,.06);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.popup{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.88);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:99999;
+    padding:18px;
+}
+
+.popup.active{
+    display:flex;
+}
+
+.popup img{
+    width:100%;
+    max-width:380px;
+    border-radius:20px;
+}
+
+.close{
+    position:absolute;
+    top:18px;
+    right:18px;
+    width:46px;
+    height:46px;
+    border:none;
+    border-radius:50%;
+    background:rgba(255,255,255,.1);
+    color:white;
+    font-size:20px;
+}
+
+/* FOOTER */
+footer{
+    padding:30px 10px;
+    text-align:center;
+    color:#b9bcc8;
+    font-size:14px;
+}
+
+@media(max-width:700px){
+
+.hero h1{
+    font-size:38px;
+}
+
+.nav button{
+    width:100%;
+}
+
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="nav">
+        <button onclick="showPage('payment')">Payment</button>
+        <button onclick="showPage('produk')">Produk</button>
+        <button onclick="showPage('owner')">Owner</button>
+    </div>
+</header>
+
+<div class="container">
+
+    <!-- PAGE 1 -->
+    <section id="home" class="page active">
+        <div class="hero">
+            <h1>SADXX HOSTING</h1>
+            <p>
+                Selamat datang di website official SADXX HOSTING. 
+                Menyediakan berbagai layanan digital, kebutuhan hosting, panel, website modern, dan layanan premium lainnya dengan tampilan modern dan profesional.
+            </p>
+
+            <div class="btn-group">
+                <a href="https://wa.me/62881038215657" class="btn btn-primary">
+                    Contact Owner
+                </a>
+
+                <a href="https://chat.whatsapp.com/EhC0D0Iv8FR5Df7tpNLGmz?mode=gi_t" class="btn btn-secondary">
+                    Channel Info
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAGE 2 -->
+    <section id="payment" class="page">
+
+        <div class="payment-box">
+            <h2>DANA</h2>
+
+            <div class="payment-number" id="dana">
+                0881038215657
+            </div>
+
+            <button class="copy-btn" onclick="copyText('dana')">
+                Salin Nomor
+            </button>
+        </div>
+
+        <div class="payment-box">
+            <h2>GOPAY</h2>
+
+            <div class="payment-number" id="gopay">
+                0881038215657
+            </div>
+
+            <button class="copy-btn" onclick="copyText('gopay')">
+                Salin Nomor
+            </button>
+        </div>
+
+        <div class="payment-box">
+            <h2>QRIS ALL PAYMENT</h2>
+
+            <img 
+            src="https://files.catbox.moe/jt0j9z.jpg"
+            style="width:100%;border-radius:18px;margin-bottom:15px;cursor:pointer;"
+            onclick="openPopup(this.src)"
+            >
+
+            <button class="copy-btn" onclick="openPopup('https://files.catbox.moe/jt0j9z.jpg')">
+                Perbesar QRIS
+            </button>
+        </div>
+
+    </section>
+
+    <!-- PAGE 3 -->
+    <section id="produk" class="page">
+
+        <div class="grid">
+
+            <div class="card">
+                <img src="https://files.catbox.moe/PASTE-PRODUK1.jpg">
+
+                <div class="card-content">
+
+                    <div class="card-title">
+                        Panel Pterodactyl
+                    </div>
+
+                    <div class="card-desc">
+                        Panel private anti delay dengan server stabil dan performa cepat.
+                    </div>
+
+                    <div class="price">
+                        Rp5.000
+                    </div>
+
+                    <div class="action">
+                        <button class="zoom-btn"
+                        onclick="openPopup('https://files.catbox.moe/PASTE-PRODUK1.jpg')">
+                            Perbesar
+                        </button>
+
+                        <a href="https://wa.me/6281234567890"
+                        class="order-btn">
+                            Order
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://files.catbox.moe/PASTE-PRODUK2.jpg">
+
+                <div class="card-content">
+
+                    <div class="card-title">
+                        Website Premium
+                    </div>
+
+                    <div class="card-desc">
+                        Website modern menggunakan HTML/CSS/JS dengan tampilan profesional dan responsive.
+                    </div>
+
+                    <div class="price">
+                        Rp25.000
+                    </div>
+
+                    <div class="action">
+                        <button class="zoom-btn"
+                        onclick="openPopup('https://files.catbox.moe/PASTE-PRODUK2.jpg')">
+                            Perbesar
+                        </button>
+
+                        <a href="https://wa.me/6281234567890"
+                        class="order-btn">
+                            Order
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- PAGE 4 -->
+    <section id="owner" class="page">
+
+        <div class="owner-box">
+
+            <img src="https://files.catbox.moe/ue5ra5.jpg">
+
+            <h2>SADXX OFFICIAL</h2>
+
+            <p>
+                Developer website modern dan layanan digital profesional.
+                Website ini dihosting menggunakan Vercel dan dibuat hanya menggunakan 1 file HTML.
+            </p>
+
+            <div class="socials">
+                <a href="https://wa.me/62881038215657">
+                    WhatsApp
+                </a>
+
+                <a href="https://t.me/sadxxgantengkatamamah">
+                    Telegram
+                </a>
+
+                <a href="https://tiktok.com/sadxxhosting">
+                    TikTok
+                </a>
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+<footer>
+    © 2026 SADXX OFFICIAL - All Rights Reserved
+</footer>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+
+    <button class="close" onclick="closePopup()">
+        ✕
+    </button>
+
+    <img id="popup-img">
+
+</div>
+
+<script>
+
+let currentPage = "home";
+
+function showPage(pageId){
+
+    document.querySelectorAll('.page').forEach(page=>{
+        page.classList.remove('active');
+    });
+
+    document.getElementById(pageId)
+    .classList.add('active');
+
+    document.querySelectorAll('.nav button')
+    .forEach(btn=>{
+        btn.classList.remove('active');
+    });
+
+    event.target.classList.add('active');
+}
+
+function copyText(id){
+
+    let text = document.getElementById(id).innerText;
+
+    navigator.clipboard.writeText(text);
+
+    alert("Berhasil disalin: " + text);
+}
+
+function openPopup(src){
+
+    document.getElementById('popup').classList.add('active');
+    document.getElementById('popup-img').src = src;
+}
+
+function closePopup(){
+
+    document.getElementById('popup').classList.remove('active');
+}
+
+</script>
+
+</body>
+</html>
